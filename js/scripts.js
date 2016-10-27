@@ -1,51 +1,35 @@
-// var numerals = ["I", "V", "X", "L", "C", "D", "M"];
 
 var answer = [];
 
-var numerals = {
+var numerals = [["","I","II","III","IV","V","VI","VII","VIII","IX"],
+               ["","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"],
+               ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"],
+               ["", "M", "MM", "MMM"]];
 
-  O:0,
-  I:1,
-  V:5,
-  X:10,
-  L:50,
-  C:100,
-  D:500,
-  M:1000
-
-};
-
-var numeralsOneNine = ["","I","II","III","IV","V","VI","VII","VIII","IX"];
-var numeralsTenNinety = ["","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"];
-var numeralsHundredNineHundred = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
-var numeralsThousandThreeThousand = ["", "M", "MM", "MMM"];
 
 var converter = function(number) {
-  var lengthNum = number.length;
+  answer = [];                              // Resets answer after every click
   var reverseNum = number.split("").reverse();
 
-  for (i = 0; i < lengthNum; i++) {
-    var firstThing = numeralsOneNine[parseInt(reverseNum[i])];
-    answer.push(firstThing);
-    alert(answer);
+
+  for (i = 0; i < number.length; i++) {
+
+    var thing = numerals[i][parseInt(reverseNum[i])];
+    answer.push(thing);
+
+
   };
-
+      return (answer.reverse().join(""));
 };
 
-var ruleThree = function(arrayNum) {
-  arrayNum = arrayNum.split("");
-
-  for(i = 0; i < arrayNum.length; i++) {
-    var two = i + 1;
-    var three = i + 2;
-      if (arrayNum[i] === arrayNum[two] && arrayNum[two] === arrayNum[three]) {
-        result = false;
-      } else {
-        result = true;
-      }
-  }
-  return result;
-};
+// Create array of arrays of roman numerals
+  // index refers to each place (ones, tens, hundreds, thousands)
+// When converter is called, the argument is converted to an array and reversed
+  // The reversed argument will enter a for loop
+    // The for loop will iterate through the numerals array and iterate through one of the inner arrays and grab a value and push it to a new array "thing"
+    // The for loop will repeat this for all argument values
+  // The array "thing" will be reversed again and joined into a string to eliminate commas
+  // return "thing"
 
 
 $(document).ready(function() {
@@ -54,8 +38,14 @@ $(document).ready(function() {
     event.preventDefault();
 
     var userInput = $("#userInput").val();
+    var parsedInput = parseInt(userInput);
 
-    $("#output p").text(converter(userInput));
+    if (parsedInput > 3999 || parsedInput < 0) {
+      alert("Invalid entry, must be a number below 4000 and above -1");
+    } else {
+      $("#output p").text(converter(userInput));
+    }
+
 
 
 

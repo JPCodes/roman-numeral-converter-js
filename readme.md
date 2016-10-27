@@ -14,8 +14,4 @@
 
 * Convert the rest..
 
-* Disallow more than 3 of the same symbol in a row
-
-* Subtract when a smaller symbol precedes a larger symbol
-
 * Disallow counting over 3,999
